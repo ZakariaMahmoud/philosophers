@@ -6,7 +6,7 @@
 /*   By: zmahmoud <zmahmoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 11:23:54 by zmahmoud          #+#    #+#             */
-/*   Updated: 2022/06/19 11:44:43 by zmahmoud         ###   ########.fr       */
+/*   Updated: 2022/06/29 07:44:42 by zmahmoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,36 +18,39 @@
 #include <unistd.h>
 #include <limits.h>
 #include <pthread.h>
+#include <sys/time.h>
 
 typedef struct philo
 {
 	int				id;
+	long			time_to_eat;
+	long			time_to_sleep;
+	long			time_to_die;
+	long			last_meal;
 	pthread_t		thread;
 	pthread_mutex_t fork;
+	struct helper	*helper;
 }	t_philo;
 
 typedef struct helper 
 {
-	int		number_of_philos;
-	long	time_to_eat;
-	long	time_to_sleep;
-	long	time_to_die;
-	long	times_philo_must_eat;
-	t_philo *philos;
-		
+	int				number_of_philos;
+	long			time_to_eat;
+	long			time_to_sleep;
+	long			time_to_die;
+	long			times_philo_must_eat;
+	long			start_time;
+	t_philo 		*philos;
 }	t_helper;
 
-typedef struct groupe 
-{
-	t_philo		philo;
-	t_helper	helper;
-}	t_groupe;
-
 long long	ft_atoi(const char *str);
+long 		ft_get_time();
+long 		ft_get_diff_time(long diff);
 int			check_args(int argc, char **argv);
 int			ft_isdigit(int c);
 int			ft_check_args(int argc, char *argv[]);
-void		init_helper(int argc, char*argv[], t_groupe *t_groupe);
-void		init_philos(t_groupe *t_groupe);
-t_philo		*get_philo_by_id(t_groupe *t_groupe, int id);
+void		init_helper(int argc, char*argv[], t_helper *helper);
+void		init_philos(t_helper *helper);
+t_philo		*get_philo_by_id(t_helper *helper, int id);
+t_philo		*get_next_philo(t_helper *helper, int id);
 #endif

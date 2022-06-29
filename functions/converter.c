@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_helper.c                                     :+:      :+:    :+:   */
+/*   converter.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zmahmoud <zmahmoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/16 12:28:56 by zmahmoud          #+#    #+#             */
-/*   Updated: 2022/06/23 19:43:58 by zmahmoud         ###   ########.fr       */
+/*   Created: 2022/06/20 07:56:11 by zmahmoud          #+#    #+#             */
+/*   Updated: 2022/06/28 18:24:23 by zmahmoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
-t_philo	*get_philo_by_id(t_helper *helper, int id)
+long 	ft_get_time()
 {
-	if (id < helper->number_of_philos)
-		return (&helper->philos[id]);
-	return (0);
+	struct timeval	time;
+
+	gettimeofday(&time, 0);	
+	return ((time.tv_sec) * 1000 + (time.tv_usec) / 1000);
 }
 
-t_philo	*get_next_philo(t_helper *helper, int id)
+long 	ft_get_diff_time(long diff)
 {
-	if (id + 1 < helper->number_of_philos)
-		return (&helper->philos[id + 1]);
-	else if (id + 1 == helper->number_of_philos)
-		return (&helper->philos[0]);
-	return (0);
+	struct timeval	time;
+	long			now;
+
+	gettimeofday(&time, 0);	
+	now = (time.tv_sec) * 1000 + (time.tv_usec) / 1000;
+	return (now - diff);
 }
