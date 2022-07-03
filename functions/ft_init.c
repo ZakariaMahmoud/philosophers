@@ -6,7 +6,7 @@
 /*   By: zmahmoud <zmahmoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 11:43:41 by zmahmoud          #+#    #+#             */
-/*   Updated: 2022/06/29 07:50:06 by zmahmoud         ###   ########.fr       */
+/*   Updated: 2022/07/03 12:41:39 by zmahmoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	init_helper(int argc, char*argv[], t_helper *helper)
 	helper->time_to_sleep = ft_atoi(argv[4]);
 	helper->start_time = ft_get_time();
 	helper->philos = malloc(helper->number_of_philos * sizeof(t_philo));
+	pthread_mutex_init(&helper->writing, 0);
 	if (argc == 5)
 		helper->times_philo_must_eat   = -1;
 	else
@@ -38,9 +39,7 @@ void	init_philos(t_helper *helper)
 	{
 		philos[i].id = i;
 		philos[i].last_meal = 0;
-		philos[i].time_to_die = helper->time_to_die;
-		philos[i].time_to_eat = helper->time_to_eat;
-		philos[i].time_to_sleep = helper->time_to_sleep;
+		philos[i].time_died = -1;
 		philos[i].helper = helper;
 		pthread_mutex_init(&philos[i].fork, 0);
 		i++;
