@@ -6,7 +6,7 @@
 /*   By: zmahmoud <zmahmoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 11:23:54 by zmahmoud          #+#    #+#             */
-/*   Updated: 2022/07/03 12:41:21 by zmahmoud         ###   ########.fr       */
+/*   Updated: 2022/07/13 15:54:43 by zmahmoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@
 typedef struct philo
 {
 	int				id;
-	long			time_died;
+	int				is_eating;
 	long			last_meal;
 	pthread_t		thread;
 	pthread_mutex_t fork;
-	struct helper		*helper;
+	struct helper	*helper;
 }	t_philo;
 
 typedef struct helper 
@@ -38,6 +38,7 @@ typedef struct helper
 	long			time_to_die;
 	long			times_philo_must_eat;
 	long			start_time;
+	int				check;
 	pthread_mutex_t	writing;
 	t_philo 		*philos;
 }	t_helper;
@@ -48,7 +49,7 @@ long 		ft_get_diff_time(long diff);
 int			check_args(int argc, char **argv);
 int			ft_isdigit(int c);
 int			ft_check_args(int argc, char *argv[]);
-void		init_helper(int argc, char*argv[], t_helper *helper);
+int			init_helper(int argc, char*argv[], t_helper *helper);
 void		init_philos(t_helper *helper);
 void		ft_msleep(int milliseconds);
 t_philo		*get_philo_by_id(t_helper *helper, int id);

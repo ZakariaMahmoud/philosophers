@@ -6,7 +6,7 @@
 #    By: zmahmoud <zmahmoud@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/16 10:25:54 by zmahmoud          #+#    #+#              #
-#    Updated: 2022/07/03 12:55:49 by zmahmoud         ###   ########.fr        #
+#    Updated: 2022/07/13 14:39:04 by zmahmoud         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,8 @@ SRCS =functions/ft_isdigit.c\
 	philo.c\
 
 # FLAGS = -Wall -Werror -Wextra
-FLAGS= -fsanitize=thread
+# FLAGS= -fsanitize=thread
+FLAGS= -Wall -Werror -Wextra 
 
 NAME = philo
 OBJS = $(subst .c,.o,$(SRCS))
