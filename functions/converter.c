@@ -30,7 +30,7 @@ long 	ft_get_diff_time(long diff)
 	return (now - diff);
 }
 
-void	ft_msleep(int milliseconds)
+void	ft_msleep(long milliseconds)
 {
 	int		micros;
 	long	current_time;
