@@ -6,7 +6,7 @@
 /*   By: zmahmoud <zmahmoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 22:48:42 by zmahmoud          #+#    #+#             */
-/*   Updated: 2022/08/01 14:34:58 by zmahmoud         ###   ########.fr       */
+/*   Updated: 2022/08/01 23:30:39 by zmahmoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ void	print_philo(char *msg, t_philo *philo)
 	{
 		time = ft_get_diff_time(t_helper.start_time);
 		printf("%ld %d %s\n", time, philo->id + 1, msg);
-		pthread_mutex_unlock(&t_helper.writing);
+		if (msg[0] != 'd')
+			pthread_mutex_unlock(&t_helper.writing);
 	}
 }
 
@@ -33,6 +34,7 @@ void	philo_eating(t_philo *philo, t_philo *next_philo)
 	if (pthread_mutex_unlock(&next_philo->fork))
 		perror("philo->fork unlock");
 	philo->last_meal = ft_get_diff_time(t_helper.start_time);
+	philo->must_eat++;
 }
 
 void	philo_sleeping(t_philo *philo)
@@ -57,10 +59,10 @@ void	*philo_thread(void *arg)
 	{
 		if (pthread_mutex_lock(&philo->fork) == 0)
 		{
-			print_philo("has taken a fork", philo);
+			print_philo("has taken a fork1", philo);
 			if (pthread_mutex_lock(&next_philo->fork) == 0)
 			{
-				print_philo("has taken a fork", philo);
+				print_philo("has taken a fork2", philo);
 				philo_eating(philo, next_philo);
 				philo_sleeping(philo);
 				philo_thinking(philo);

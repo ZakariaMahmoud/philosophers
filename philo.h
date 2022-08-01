@@ -6,7 +6,7 @@
 /*   By: zmahmoud <zmahmoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 11:23:54 by zmahmoud          #+#    #+#             */
-/*   Updated: 2022/07/25 00:29:55 by zmahmoud         ###   ########.fr       */
+/*   Updated: 2022/08/01 21:09:08 by zmahmoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 typedef struct philo
 {
 	int				id;
+	int				must_eat;
 	long			last_meal;
 	pthread_t		thread;
 	pthread_mutex_t fork;
@@ -53,6 +54,7 @@ void		create_philos();
 void		detach_philos();
 void		*philo_thread(void	*args);
 void		ft_msleep(long milliseconds);
+void		print_philo(char *msg, t_philo *philo);
 long long	ft_atoi(const char *str);
 t_philo		*get_philo_by_id(int id);
 t_philo		*get_next_philo_by_id(int id);

@@ -1,0 +1,7 @@
+.vscode
+*.o
+./a.out
+.DS_Store
+*/.DS_Store
+philo
+output.txt
