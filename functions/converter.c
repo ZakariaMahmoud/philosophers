@@ -6,7 +6,7 @@
 /*   By: zmahmoud <zmahmoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 07:56:11 by zmahmoud          #+#    #+#             */
-/*   Updated: 2022/07/14 15:53:39 by zmahmoud         ###   ########.fr       */
+/*   Updated: 2022/08/01 14:51:34 by zmahmoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ void	ft_msleep(long milliseconds)
 	int		micros;
 	long	current_time;
 
-	micros = (milliseconds - 10) * 1000;
+	micros = (milliseconds - (milliseconds / 10)) * 1000;
 	current_time = ft_get_time();
 	if (milliseconds > 20)
 	{
 		usleep(micros);
-		while (ft_get_diff_time(current_time) != milliseconds) usleep(100);
+		while (ft_get_diff_time(current_time) < milliseconds) usleep(100);
 	}
 }
