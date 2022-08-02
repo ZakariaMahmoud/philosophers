@@ -6,7 +6,7 @@
 /*   By: zmahmoud <zmahmoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 11:23:54 by zmahmoud          #+#    #+#             */
-/*   Updated: 2022/08/01 21:09:08 by zmahmoud         ###   ########.fr       */
+/*   Updated: 2022/08/02 12:14:53 by zmahmoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct philo
 	int				must_eat;
 	long			last_meal;
 	pthread_t		thread;
+	pthread_mutex_t m_last_meal;
 	pthread_mutex_t fork;
 }	t_philo;
 

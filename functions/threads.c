@@ -6,7 +6,7 @@
 /*   By: zmahmoud <zmahmoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 22:48:42 by zmahmoud          #+#    #+#             */
-/*   Updated: 2022/08/01 23:30:39 by zmahmoud         ###   ########.fr       */
+/*   Updated: 2022/08/02 12:22:58 by zmahmoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ void	philo_eating(t_philo *philo, t_philo *next_philo)
 {
 	print_philo("is eating", philo);
 	ft_msleep(t_helper.time_to_eat);
-	if (pthread_mutex_unlock(&philo->fork))
-		perror("philo->fork unlock");
-	if (pthread_mutex_unlock(&next_philo->fork))
-		perror("philo->fork unlock");
+	pthread_mutex_unlock(&philo->fork);
+	pthread_mutex_unlock(&next_philo->fork);
+	pthread_mutex_lock(&philo->m_last_meal);
 	philo->last_meal = ft_get_diff_time(t_helper.start_time);
+	pthread_mutex_unlock(&philo->m_last_meal);
 	philo->must_eat++;
 }
 
@@ -59,10 +59,10 @@ void	*philo_thread(void *arg)
 	{
 		if (pthread_mutex_lock(&philo->fork) == 0)
 		{
-			print_philo("has taken a fork1", philo);
+			print_philo("has taken a fork 1", philo);
 			if (pthread_mutex_lock(&next_philo->fork) == 0)
 			{
-				print_philo("has taken a fork2", philo);
+				print_philo("has taken a fork 2", philo);
 				philo_eating(philo, next_philo);
 				philo_sleeping(philo);
 				philo_thinking(philo);

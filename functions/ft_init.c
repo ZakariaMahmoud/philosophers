@@ -6,7 +6,7 @@
 /*   By: zmahmoud <zmahmoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 11:43:41 by zmahmoud          #+#    #+#             */
-/*   Updated: 2022/08/01 21:09:19 by zmahmoud         ###   ########.fr       */
+/*   Updated: 2022/08/02 12:15:28 by zmahmoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	init_philos()
 		philos[i].id = i;
 		philos[i].last_meal = 0;
 		philos[i].must_eat = 0;
+		pthread_mutex_init(&philos[i].m_last_meal, 0);
 		pthread_mutex_init(&philos[i].fork, 0);
 		i++;
 	}

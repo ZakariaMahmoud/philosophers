@@ -6,7 +6,7 @@
 /*   By: zmahmoud <zmahmoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 11:24:05 by zmahmoud          #+#    #+#             */
-/*   Updated: 2022/08/01 23:23:40 by zmahmoud         ###   ########.fr       */
+/*   Updated: 2022/08/02 14:56:02 by zmahmoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,15 @@ void	check_if_philo_died()
 	{
 		philo = get_philo_by_id(i++);
 		time = ft_get_diff_time(t_helper.start_time);
-		if (time - philo->last_meal > t_helper.time_to_die || (t_helper.times_philo_must_eat != -1 && check_must_eat()))
-			break ;
 		if (i == t_helper.number_of_philos)
 			i = 0;
+		if (pthread_mutex_lock(&philo->m_last_meal) == 0)
+		{
+			if (time - philo->last_meal > t_helper.time_to_die || (t_helper.times_philo_must_eat != -1 && check_must_eat()))
+				break ;
+			pthread_mutex_unlock(&philo->m_last_meal);
+		}
 	}
-	printf("last-meal = %ld | time_to_die = %ld | time = %ld | time - philo->last_meal = %ld\n", philo->last_meal, t_helper.time_to_die, time, time - philo->last_meal);
 	if (time - philo->last_meal > t_helper.time_to_die)
 		print_philo("died", philo);
 }
