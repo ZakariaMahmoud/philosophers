@@ -6,7 +6,7 @@
 /*   By: zmahmoud <zmahmoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 22:48:42 by zmahmoud          #+#    #+#             */
-/*   Updated: 2022/08/02 12:22:58 by zmahmoud         ###   ########.fr       */
+/*   Updated: 2022/08/04 19:59:20 by zmahmoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,36 +16,13 @@ void	print_philo(char *msg, t_philo *philo)
 {
 	long	time;
 
-	if (pthread_mutex_lock(&t_helper.writing) == 0)
+	if (pthread_mutex_lock(&s_helper.writing) == 0)
 	{
-		time = ft_get_diff_time(t_helper.start_time);
+		time = ft_get_diff_time(s_helper.start_time);
 		printf("%ld %d %s\n", time, philo->id + 1, msg);
 		if (msg[0] != 'd')
-			pthread_mutex_unlock(&t_helper.writing);
+			pthread_mutex_unlock(&s_helper.writing);
 	}
-}
-
-void	philo_eating(t_philo *philo, t_philo *next_philo)
-{
-	print_philo("is eating", philo);
-	ft_msleep(t_helper.time_to_eat);
-	pthread_mutex_unlock(&philo->fork);
-	pthread_mutex_unlock(&next_philo->fork);
-	pthread_mutex_lock(&philo->m_last_meal);
-	philo->last_meal = ft_get_diff_time(t_helper.start_time);
-	pthread_mutex_unlock(&philo->m_last_meal);
-	philo->must_eat++;
-}
-
-void	philo_sleeping(t_philo *philo)
-{
-	print_philo("is sleeping", philo);
-	ft_msleep(t_helper.time_to_sleep);
-}
-
-void	philo_thinking(t_philo *philo)
-{
-	print_philo("is thinking", philo);
 }
 
 void	*philo_thread(void *arg)
@@ -74,14 +51,14 @@ void	*philo_thread(void *arg)
 	return (0);
 }
 
-void	detach_philos()
+void	detach_philos(void)
 {
 	int		id;
 	t_philo	*philos;
 
 	id = 0;
-	philos = t_helper.philos;
-	while (id < t_helper.number_of_philos)
+	philos = s_helper.philos;
+	while (id < s_helper.number_of_philos)
 	{
 		pthread_detach(philos[id].thread);
 		id++;

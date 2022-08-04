@@ -6,7 +6,7 @@
 /*   By: zmahmoud <zmahmoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 07:56:11 by zmahmoud          #+#    #+#             */
-/*   Updated: 2022/08/02 00:23:49 by zmahmoud         ###   ########.fr       */
+/*   Updated: 2022/08/04 19:53:43 by zmahmoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ long	ft_get_time(void)
 	return ((time.tv_sec) * 1000 + (time.tv_usec) / 1000);
 }
 
-long 	ft_get_diff_time(long diff)
+long	ft_get_diff_time(long diff)
 {
 	return (ft_get_time() - diff);
 }
@@ -35,6 +35,7 @@ void	ft_msleep(long milliseconds)
 	if (milliseconds > 20)
 	{
 		usleep(micros);
-		while (ft_get_diff_time(current_time) < milliseconds) usleep(100);
+		while (ft_get_diff_time(current_time) < milliseconds)
+			usleep(100);
 	}
 }
