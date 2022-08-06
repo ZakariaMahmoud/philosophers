@@ -6,7 +6,7 @@
 /*   By: zmahmoud <zmahmoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 12:28:56 by zmahmoud          #+#    #+#             */
-/*   Updated: 2022/08/04 19:59:15 by zmahmoud         ###   ########.fr       */
+/*   Updated: 2022/08/05 04:45:15 by zmahmoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,9 @@ void	philo_eating(t_philo *philo, t_philo *next_philo)
 	pthread_mutex_lock(&philo->m_last_meal);
 	philo->last_meal = ft_get_diff_time(s_helper.start_time);
 	pthread_mutex_unlock(&philo->m_last_meal);
+	pthread_mutex_lock(&philo->m_must_eat);
 	philo->must_eat++;
+	pthread_mutex_unlock(&philo->m_must_eat);
 }
 
 void	philo_sleeping(t_philo *philo)

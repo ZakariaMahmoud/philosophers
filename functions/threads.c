@@ -6,7 +6,7 @@
 /*   By: zmahmoud <zmahmoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 22:48:42 by zmahmoud          #+#    #+#             */
-/*   Updated: 2022/08/04 19:59:20 by zmahmoud         ###   ########.fr       */
+/*   Updated: 2022/08/04 20:05:22 by zmahmoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ void	*philo_thread(void *arg)
 	{
 		if (pthread_mutex_lock(&philo->fork) == 0)
 		{
-			print_philo("has taken a fork 1", philo);
+			print_philo("has taken a fork", philo);
 			if (pthread_mutex_lock(&next_philo->fork) == 0)
 			{
-				print_philo("has taken a fork 2", philo);
+				print_philo("has taken a fork", philo);
 				philo_eating(philo, next_philo);
 				philo_sleeping(philo);
 				philo_thinking(philo);
