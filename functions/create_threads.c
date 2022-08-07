@@ -6,7 +6,7 @@
 /*   By: zmahmoud <zmahmoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 22:17:51 by zmahmoud          #+#    #+#             */
-/*   Updated: 2022/08/04 19:54:52 by zmahmoud         ###   ########.fr       */
+/*   Updated: 2022/08/06 20:14:35 by zmahmoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	create_even_philos(void)
 		pthread_create(&philos[id].thread, 0, &philo_thread, &philos[id]);
 		id += 2;
 	}
-	usleep(100);
+	usleep((s_helper.time_to_eat / 2) * 1000);
 	create_odd_philos();
 }
 

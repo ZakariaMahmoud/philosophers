@@ -6,7 +6,7 @@
 /*   By: zmahmoud <zmahmoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 07:56:11 by zmahmoud          #+#    #+#             */
-/*   Updated: 2022/08/04 19:53:43 by zmahmoud         ###   ########.fr       */
+/*   Updated: 2022/08/06 17:10:12 by zmahmoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,11 @@ long	ft_get_diff_time(long diff)
 
 void	ft_msleep(long milliseconds)
 {
-	int		micros;
 	long	current_time;
 
-	micros = (milliseconds - (milliseconds / 10)) * 1000;
 	current_time = ft_get_time();
 	if (milliseconds > 20)
 	{
-		usleep(micros);
 		while (ft_get_diff_time(current_time) < milliseconds)
 			usleep(100);
 	}

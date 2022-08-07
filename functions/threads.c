@@ -6,7 +6,7 @@
 /*   By: zmahmoud <zmahmoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 22:48:42 by zmahmoud          #+#    #+#             */
-/*   Updated: 2022/08/04 20:05:22 by zmahmoud         ###   ########.fr       */
+/*   Updated: 2022/08/06 23:26:04 by zmahmoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,20 +47,7 @@ void	*philo_thread(void *arg)
 			else
 				pthread_mutex_unlock(&philo->fork);
 		}
+		usleep(100);
 	}
 	return (0);
-}
-
-void	detach_philos(void)
-{
-	int		id;
-	t_philo	*philos;
-
-	id = 0;
-	philos = s_helper.philos;
-	while (id < s_helper.number_of_philos)
-	{
-		pthread_detach(philos[id].thread);
-		id++;
-	}
 }
