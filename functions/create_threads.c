@@ -6,41 +6,41 @@
 /*   By: zmahmoud <zmahmoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 22:17:51 by zmahmoud          #+#    #+#             */
-/*   Updated: 2022/08/06 20:14:35 by zmahmoud         ###   ########.fr       */
+/*   Updated: 2022/08/11 02:38:36 by zmahmoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
-void	create_philos(void)
+void	create_philos(t_helper *helper)
 {
-	create_even_philos();
+	create_even_philos(helper);
 }
 
-void	create_even_philos(void)
+void	create_even_philos(t_helper *helper)
 {
 	int		id;
 	t_philo	*philos;
 
 	id = 0;
-	philos = s_helper.philos;
-	while (id < s_helper.number_of_philos)
+	philos = helper->philos;
+	while (id < helper->number_of_philos)
 	{
 		pthread_create(&philos[id].thread, 0, &philo_thread, &philos[id]);
 		id += 2;
 	}
-	usleep((s_helper.time_to_eat / 2) * 1000);
-	create_odd_philos();
+	usleep((helper->time_to_eat / 2) * 1000);
+	create_odd_philos(helper);
 }
 
-void	create_odd_philos(void)
+void	create_odd_philos(t_helper *helper)
 {
 	int		id;
 	t_philo	*philos;
 
 	id = 1;
-	philos = s_helper.philos;
-	while (id < s_helper.number_of_philos)
+	philos = helper->philos;
+	while (id < helper->number_of_philos)
 	{
 		pthread_create(&philos[id].thread, 0, &philo_thread, &philos[id]);
 		id += 2;
